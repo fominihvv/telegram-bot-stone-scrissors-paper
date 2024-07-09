@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 from environs import Env
 
-__LANG__ = 'ru'
-
 
 @dataclass
 class TgBot:

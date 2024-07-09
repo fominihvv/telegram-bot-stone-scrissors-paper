@@ -1,12 +1,11 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from lexicon.lexicon import LEXICON
-from config_data.config import __LANG__
 
 set_keyboard_game = [
-    [KeyboardButton(text=LEXICON[__LANG__]['stone']), KeyboardButton(text=LEXICON[__LANG__]['scissors']),
-     KeyboardButton(text=LEXICON[__LANG__]['paper'])]]
+    [KeyboardButton(text=LEXICON['stone']), KeyboardButton(text=LEXICON['scissors']),
+     KeyboardButton(text=LEXICON['paper'])]]
 
-set_keyboard_yes_no = [[KeyboardButton(text=LEXICON[__LANG__]['no']), KeyboardButton(text=LEXICON[__LANG__]['yes'])]]
+set_keyboard_yes_no = [[KeyboardButton(text=LEXICON['no']), KeyboardButton(text=LEXICON['yes'])]]
 
 keyboard_game = ReplyKeyboardMarkup(
     keyboard=set_keyboard_game,

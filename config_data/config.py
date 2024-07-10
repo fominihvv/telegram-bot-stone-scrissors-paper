@@ -3,19 +3,25 @@ import logging
 from dataclasses import dataclass
 from environs import Env
 
-logger = logging.getLogger(__name__)
+logger_config = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(filename)s:%(lineno)d #%(levelname)-8s '
+           '[%(asctime)s] - %(name)s - %(message)s')
+
 db_lock = asyncio.Lock()
 
 
 @dataclass
 class LocalDatabaseConfig:
-    database: str  # Название базы данных
-    database_path: str  # Путь к базе данных
+    database: str
+    database_path: str
 
 
 @dataclass
 class TgBot:
-    token: str  # Токен для доступа к телеграм-боту
+    token: str
+    admin_ids: list[int]
 
 
 @dataclass
@@ -26,21 +32,23 @@ class Config:
 
 def load_config(path: str | None = None) -> Config:
     try:
-        logger.info('Загрузка конфигурации из .env')
+        logger_config.info('Загрузка конфигурации из .env')
         env: Env = Env()
         env.read_env(path)
     except FileNotFoundError:
-        logger.critical('Файл .env отсутствует. Программа будет остановлена')
+        logger_config.critical('Файл .env отсутствует. Программа будет остановлена')
         raise SystemExit
 
     return Config(
         tg_bot=TgBot(
-            token=env('BOT_TOKEN')
+            token=env('BOT_TOKEN'),
+            admin_ids=env.list('ADMIN_IDS')
         ),
         db=LocalDatabaseConfig(
             database=env('database'),
             database_path=env('database_path')
         )
     )
+
 
 config = load_config('.env')

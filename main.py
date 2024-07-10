@@ -1,12 +1,13 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from config_data.config import config, logger
+from config_data.config import config
 from handlers import user_handlers
-from models import methods
+from database import db_methods
 
 
 async def main():
+    logger = logging.getLogger(__name__)
     logging.basicConfig(
         level=logging.INFO,
         format='%(filename)s:%(lineno)d #%(levelname)-8s '
@@ -17,7 +18,7 @@ async def main():
     dp = Dispatcher()
 
     logger.info('Проверяем наличие базы данных')
-    await methods.db_check()
+    await db_methods.db_check()
 
     logger.info('Регистрируем роутеры в диспетчере')
     dp.include_router(user_handlers.router_user_handlers)

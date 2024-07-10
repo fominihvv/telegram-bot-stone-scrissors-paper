@@ -1,11 +1,19 @@
 import aiosqlite
-import models.db_query as db_query
-from config_data.config import config, logger, db_lock
+import logging
+import database.db_query as db_query
+from config_data.config import config, db_lock
+
+
+logger_user_db_methods = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(filename)s:%(lineno)d #%(levelname)-8s '
+           '[%(asctime)s] - %(name)s - %(message)s')
 
 
 async def db_check() -> None:
-    logger.info('Создание таблицы в базе данных если она отсутствует')
-    logger.debug(f'Ждём {db_lock}')
+    logger_user_db_methods.info('Создание таблицы в базе данных если она отсутствует')
+    logger_user_db_methods.debug(f'Ждём {db_lock}')
     async with db_lock:
         async with aiosqlite.connect(f'{config.db.database_path}/{config.db.database}') as connection:
             cursor = await connection.cursor()
@@ -14,8 +22,8 @@ async def db_check() -> None:
 
 
 async def get_user_data(user_id: int) -> list:
-    logger.info(f'Получение данных пользователя {user_id} из базы данных')
-    logger.debug(f'Ждём {db_lock}')
+    logger_user_db_methods.info(f'Получение данных пользователя {user_id} из базы данных')
+    logger_user_db_methods.debug(f'Ждём {db_lock}')
     async with db_lock:
         async with aiosqlite.connect(f'{config.db.database_path}/{config.db.database}') as connection:
             cursor = await connection.cursor()
@@ -28,8 +36,8 @@ async def get_user_data(user_id: int) -> list:
 
 
 async def update_user_data(user_id: int, user: list) -> None:
-    logger.info(f'Сохранение данных пользователя {user_id} в базе данных')
-    logger.debug(f'Ждём {db_lock}')
+    logger_user_db_methods.info(f'Сохранение данных пользователя {user_id} в базе данных')
+    logger_user_db_methods.debug(f'Ждём {db_lock}')
     async with db_lock:
         async with aiosqlite.connect(f'{config.db.database_path}/{config.db.database}') as connection:
             cursor = await connection.cursor()
@@ -38,8 +46,8 @@ async def update_user_data(user_id: int, user: list) -> None:
 
 
 async def new_user(user_id: int, user: list) -> None:
-    logger.info(f'Добавление нового пользователя {user_id} в базу данных')
-    logger.debug(f'Ждём {db_lock}')
+    logger_user_db_methods.info(f'Добавление нового пользователя {user_id} в базу данных')
+    logger_user_db_methods.debug(f'Ждём {db_lock}')
     async with db_lock:
         async with aiosqlite.connect(f'{config.db.database_path}/{config.db.database}') as connection:
             cursor = await connection.cursor()

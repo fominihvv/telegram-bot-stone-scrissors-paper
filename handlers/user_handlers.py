@@ -19,6 +19,7 @@ async def process_start_command(message: Message):
     if not user:
         logger.info(f'Создаем пользователя {message.from_user.id} в базе данных')
         await methods.new_user(message.from_user.id, [message.from_user.full_name, 0, 0, 0, 0])
+    await message.answer(text=LEXICON['privet'].format(user[1]), reply_markup=keyboard_yes_no)
     await message.answer(text=LEXICON['start_game'], reply_markup=keyboard_game)
 
 

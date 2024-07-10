@@ -1,10 +1,9 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from config_data.config import config
+from config_data.config import config, logger
 from handlers import user_handlers
-
-logger = logging.getLogger(__name__)
+from models import methods
 
 
 async def main():
@@ -13,12 +12,20 @@ async def main():
         format='%(filename)s:%(lineno)d #%(levelname)-8s '
                '[%(asctime)s] - %(name)s - %(message)s')
 
-    logger.info('Starting bot')
+    logger.info('Настраиваем переменные окружения')
     bot = Bot(config.tg_bot.token)
     dp = Dispatcher()
 
+    logger.info('Проверяем наличие базы данных')
+    await methods.db_check()
+
+    logger.info('Регистрируем роутеры в диспетчере')
     dp.include_router(user_handlers.router_user_handlers)
+
+    logger.info('Удаляем старые апдейты')
     await bot.delete_webhook(drop_pending_updates=True)
+
+    logger.info('Запускаем бота')
     await dp.start_polling(bot)
 
 

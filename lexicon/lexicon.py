@@ -1,30 +1,24 @@
 LEXICON = {
-    'ru': {'start_game': 'Играем в камень, ножницы, бумага! Ваш выбор...',
-           'bot_choice': 'Бот выбрал {}',
-           'player_choice': 'Вы выбрали {}',
-           'player_win': 'Вы выиграли! \U0001F3C6 \U0001F3C6 \U0001F3C6',
-           'bot_win': 'Вы проиграли! \U0001F625 \U0001F625 \U0001F625',
-           'draw': 'Ничья! \U0001F644 \U0001F644 \U0001F644',
-           'try_again': 'Попробуйте еще раз?',
-           'yes': 'Да',
-           'no': 'Нет',
-           'stone': 'Камень',
-           'scissors': 'Ножницы',
-           'paper': 'Бумага',
-           'goodbye': 'Пока!\n(Наберите /start чтобы начать сначала)',
-           },
-    'en': {'start_game': 'Let\'s play rock, paper, scissors! Your choice...',
-           'bot_choice': 'Bot chose {}',
-           'player_choice': 'You chose {}',
-           'player_win': 'You won!',
-           'bot_win': 'You lose!',
-           'draw': 'Draw!',
-           'try_again': 'Try again?',
-           'yes': 'Yes',
-           'no': 'No',
-           'stone': 'Stone',
-           'scissors': 'Scissors',
-           'paper': 'Paper',
-           'goodbye': 'Goodbye!\n(Type /start to start again)',
-           }
+    'privet': '{}, здравствуйте!',
+    'unknown_command': 'Я не понимаю вашу команду. Может сыграем в камень, ножницы, бумагу?',
+    'start_game': 'Играем в камень, ножницы, бумага! Ваш выбор...',
+    'bot_choice': 'Бот выбрал {}',
+    'player_choice': 'Вы выбрали {}',
+    'player_win': 'Вы выиграли! \U0001F3C6 \U0001F3C6 \U0001F3C6',
+    'bot_win': 'Вы проиграли! \U0001F625 \U0001F625 \U0001F625',
+    'draw': 'Ничья! \U0001F644 \U0001F644 \U0001F644',
+    'try_again': 'Попробуйте еще раз?',
+    'yes': 'Да',
+    'no': 'Нет',
+    'stone': 'Камень',
+    'scissors': 'Ножницы',
+    'paper': 'Бумага',
+    'goodbye': 'Пока!\n(Если захотите ещё сыграть - наберите /start)',
+    'stat': '''Ваша статистика:\n
+         Всего игр: {}
+         Побед: {}
+         Поражений: {}
+         Ничьих: {}
+'''
+
 }

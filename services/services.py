@@ -1,11 +1,10 @@
 from random import choice
 from lexicon.lexicon import LEXICON
-from config_data.config import __LANG__
 
 player_win = {
-    LEXICON[__LANG__]['stone']: LEXICON[__LANG__]['scissors'],
-    LEXICON[__LANG__]['scissors']: LEXICON[__LANG__]['paper'],
-    LEXICON[__LANG__]['paper']: LEXICON[__LANG__]['stone']}
+    LEXICON['stone']: LEXICON['scissors'],
+    LEXICON['scissors']: LEXICON['paper'],
+    LEXICON['paper']: LEXICON['stone']}
 
 
 def get_winner(human: str, bot: str) -> str:
@@ -18,4 +17,4 @@ def get_winner(human: str, bot: str) -> str:
 
 
 def get_bot_choice() -> str:
-    return choice([LEXICON[__LANG__]['stone'], LEXICON[__LANG__]['scissors'], LEXICON[__LANG__]['paper']])
+    return choice([LEXICON['stone'], LEXICON['scissors'], LEXICON['paper']])
